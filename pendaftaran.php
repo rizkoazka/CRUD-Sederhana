@@ -8,9 +8,13 @@ if (isset($_POST['daftar'])) {
     //ambil data dari formulir 
     $nama = $_POST['nama'];
     $jurusan = $_POST['jurusan'];
+    $nim = $_POST['nim'];
+    $jeniskelamin = $_POST['jeniskelamin'];
+    $alamat = $_POST['alamat'];
+    $nohp = $_POST['nohp'];
 
     // buat query
-    $sql = "INSERT INTO mahasiswa (nama, jurusan) VALUE ('$nama', '$jurusan')";
+    $sql = "INSERT INTO mahasiswa (nama, jurusan, nim, jeniskelamin, alamat, nohp) VALUE ('$nama', '$jurusan', '$nim', '$jeniskelamin', '$alamat', '$nohp')";
     $query = mysqli_query($db, $sql);
 
     // apakah query sudah tersimpan apa belum

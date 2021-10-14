@@ -2,28 +2,30 @@
 
 include("config.php");
 
-// cek apakah tombol simpan sudah diketik atau belum?
-if(isset($_POST['simpan'])){
+// cek apakah tombol daftar sudah diketik atau belum ?
+if (isset($_POST['daftar'])) {
 
-    // ambil data dari formulir
+    //ambil data dari formulir 
     $id = $_POST['id'];
     $nama = $_POST['nama'];
     $jurusan = $_POST['jurusan'];
+    $nim = $_POST['nim'];
+    $jeniskelamin = $_POST['jeniskelamin'];
+    $alamat = $_POST['alamat'];
+    $nohp = $_POST['nohp'];
 
-    // buat query update
-    $sql = "UPDATE mahasiswa SET nama='$nama', jurusan='$jurusan' WHERE id=$id";
+    // buat query
+    $sql = "UPDATE mahasiswa SET nama='$nama', jurusan='$jurusan', nim='$nim', jeniskelamin='$jeniskelamin', alamat='$alamat', nohp='$nohp' WHERE id=$id";
     $query = mysqli_query($db, $sql);
 
-    //apakah query update berhasil?
-    if($query) {
-        //kalau berhasil alihkan ke halaman list-siswa.php
+    // apakah query sudah tersimpan apa belum
+    if ($query) {
+        // kalau berhasil alihkan ke halaman index.php dengan status=sukses
         header('Location: list.php');
     } else {
-        //kalau gagal tampilkan pesan
-        die("Gagal menyimpan perubahan...");
+        // kalau gagal alihkan ke halaman index.php dengan status=gagal
+        header('Gagal Menyimpan Perubahan');
     }
-
-    
 } else {
-    die ("Akses dilarang...");
+    die("Akses dilarang !!!");
 }

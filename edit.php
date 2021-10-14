@@ -4,20 +4,21 @@ include("config.php");
 // kalau tidak ada id di query string
 if (!isset($_GET['id'])) {
     header('Location: list.php');
-
-    //ambil id dari query string
-    $id = $_GET['id'];
-
-    // buat query untuk ambil data dari database
-    $sql = "SELECT * FROM mahasiswa WHERE id=$id";
-    $query = mysqli_query($db, $sql);
-    $siswa = mysqli_fetch_assoc($query);
-
-    //jika data yang di edit tidak ditemukan
-    if (mysqli_num_rows($query) < 1) {
-        die("data tidak ditemukan...");
-    }
 }
+
+//ambil id dari query string
+$id = $_GET['id'];
+
+// buat query untuk ambil data dari database
+$sql = "SELECT * FROM mahasiswa WHERE id=$id";
+$query = mysqli_query($db, $sql);
+$siswa = mysqli_fetch_assoc($query);
+
+//jika data yang di edit tidak ditemukan
+if (mysqli_num_rows($query) < 1) {
+    die("data tidak ditemukan...");
+}
+
 ?>
 
 <!doctype html>
@@ -31,13 +32,16 @@ if (!isset($_GET['id'])) {
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-    <title>Hello, world!</title>
+    <title>Edit Data Mahasiswa</title>
 </head>
 
 <body>
     <div class="container">
         <div class="row" style="margin: 150px;">
-            <div class="text-center card mx-5" style="padding: 50px; padding-left: 100px; padding-right:100px;">
+            <div class="card mx-5" style="padding: 50px; padding-left: 100px; padding-right:100px;">
+                <div style="margin-bottom: 20px;text-align: center;">
+                    <h2>Ubah Data Mahasiswa </h2>
+                </div>
                 <form action="edits.php" method="POST">
                     <input type="hidden" name="id" value="<?php echo $siswa['id'] ?>" />
                     <div class="mb-3">
@@ -45,10 +49,28 @@ if (!isset($_GET['id'])) {
                         <input type="text" class="form-control" id="nama" name="nama" value="<?= $siswa['nama']; ?>" />
                     </div>
                     <div class="mb-3">
+                        <label for="nim" class="form-label">NIM</label>
+                        <input type="text" class="form-control" id="nim" name="nim" value="<?= $siswa["nim"]; ?>" />
+                    </div>
+                    <div class="mb-3">
                         <label for="jurusan" class="form-label">Jurusan</label>
                         <input type="text" class="form-control" id="jurusan" name="jurusan" value="<?= $siswa["jurusan"]; ?>" />
                     </div>
-                    <button type="submit" name="daftar" class="btn btn-primary">Daftar</button>
+                    <div class="mb-3">
+                        <label for="jeniskelamin" class="form-label">Jenis Kelamin</label>
+                        <input type="text" class="form-control" id="jeniskelamin" name="jeniskelamin" value="<?= $siswa["jeniskelamin"]; ?>" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="alamat" class="form-label">Alamat</label>
+                        <input type="text" class="form-control" id="alamat" name="alamat" value="<?= $siswa["alamat"]; ?>" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="nohp" class="form-label">No. HP</label>
+                        <input type="text" class="form-control" id="nohp" name="nohp" value="<?= $siswa["nohp"]; ?>" />
+                    </div>
+                    <div class="text-center" style="padding: 5px 25px; ">
+                        <button type="submit" name="daftar" class="btn btn-primary">Edit Data Mahasiswa</button>
+                    </div>
                 </form>
             </div>
         </div>
